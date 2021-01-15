@@ -10,11 +10,30 @@ import {Post} from './model/Post';
 
 export class AppComponent {
   title = 'blogtest';
+  newattributes: Post;
 
   posts: Post[] = TestData.posts;
 
-  updatePosts(post: Post){
-    this.posts.unshift(post);
+  addToPosts(post: Post){
+    const checkPost =  this.posts.find(item=>item.id==post.id);
+    if(checkPost){
+      const indexItem = this.posts.indexOf(checkPost);
+      this.posts[indexItem] = post;
+    }else{
+      this.posts.unshift(post);
+    }
+  }
+
+  updatePost(post: Post){
+    //console.log(post);
+    this.newattributes = post;
+  }
+
+  deletePost(post: Post){
+    console.log(post);
+    this.posts = this.posts.filter(function(item) {
+        return item.id !== post.id;
+    });
   }
 
 }

@@ -1,13 +1,18 @@
 
 <div class="container">
   <app-post-form
-  (onAddPost)="updatePosts($event)"
+  (onAddPost)="addToPosts($event)"
+  [newattributes] = "newattributes"
   >
   </app-post-form>
+
   <div class="sidebar__feature__item__list__single">
     <app-post
     *ngFor="let post of posts"
-    [post]="post">
+    [post]="post"
+    (onUpdatePost)="updatePost($event)"
+    (onDeletePost)="deletePost($event)"
+    >
     </app-post>
   </div>
 </div>
