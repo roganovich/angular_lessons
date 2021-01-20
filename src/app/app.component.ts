@@ -12,7 +12,11 @@ export class AppComponent {
   title = 'blogtest';
   newattributes: Post;
 
+  search: string = '';
+
   posts: Post[] = TestData.posts;
+
+  pipe = 454.415645323
 
   addToPosts(post: Post){
     const checkPost =  this.posts.find(item=>item.id==post.id);

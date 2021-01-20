@@ -6,13 +6,21 @@
   >
   </app-post-form>
 
-  <div class="sidebar__feature__item__list__single">
-    <app-post
-    *ngFor="let post of posts"
-    [post]="post"
-    (onUpdatePost)="updatePost($event)"
-    (onDeletePost)="deletePost($event)"
-    >
-    </app-post>
+    <h2>Pipe</h2>
+    <div class="sidebar__feature__item__list__single">
+      <div class="contact__form">
+
+        <input type="text" [(ngModel)]="search" placeholder="Введите слово для поиска"/>
+      
+      <div>
+
+    <h2>Posts</h2>
+      <app-post
+      *ngFor="let post of posts | postfilter:search"
+      [post]="post"
+      (onUpdatePost)="updatePost($event)"
+      (onDeletePost)="deletePost($event)"
+      >
+      </app-post>
   </div>
 </div>

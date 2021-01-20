@@ -6,12 +6,18 @@ import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostFormComponent } from './post-form/post-form.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { SquearePipe } from './pipes/square.pipe';
+import { PostfilterPipe } from './pipes/postfilter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
-    PostFormComponent
+    PostFormComponent,
+    HighlightDirective,
+    SquearePipe,
+    PostfilterPipe
   ],
   imports: [
     BrowserModule,
