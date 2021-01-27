@@ -1,6 +1,6 @@
 
 <div class="post__text">
-    <h5>{{ post.title }} #{{ post.id }}</h5>
+    <h5 (click)="postCounterService.up()">{{ post.title }} #{{ post.id }} <b>{{ postCounterService.counter}}</b></h5>
     <p appHighlight [objStyle]="{color:'red'}">
       {{ post.text }}</p>
 
