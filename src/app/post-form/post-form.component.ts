@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input,  Output, ViewChild, ElementRef } from '@angular/core';
 import {Post} from '../model/Post';
 import {TestData} from '../data/TestData';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-form',
@@ -14,26 +15,39 @@ export class PostFormComponent implements OnInit {
   @Output() onAddPost: EventEmitter<Post> = new EventEmitter<Post>();
   @Input() newattributes: Post;
 
-  title: string;
-  text: string;
-  id: number;
-
-  constructor() { }
+  form: FormGroup
 
   ngOnInit(): void {
-
+    this.form = new FormGroup({
+      id: new FormControl(null, [
+        Validators.required
+      ]),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+      text: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(10)
+      ]),
+    });
   }
   ngOnChanges(): void {
-    if(this.newattributes){
+  /*  if(this.newattributes){
       this.id = this.newattributes.id;
       this.title = this.newattributes.title;
       this.text = this.newattributes.text;
-    }
+    }*/
   }
 
   addPost(){
-    //console.log(this.title, this.text);
-    const post: Post = {
+    if(this.form.valid){
+      console.log(this.form);
+    }else{
+      console.log("Not Valid");
+    }
+
+  /*  const post: Post = {
       id: this.id,
       title: this.title,
       text: this.text,
@@ -42,10 +56,12 @@ export class PostFormComponent implements OnInit {
     this.onAddPost.emit(post);
     this.id = null;
     this.title = "";
-    this.text = "";
+    this.text = "";*/
   }
 
   focusTitle(){
-    this.inputTitleRef.nativeElement.focus();
+    const title = this.form.get('title').value;
+    console.log(title);
+    this.form.patchValue({text:title});
   }
 }

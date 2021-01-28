@@ -4,13 +4,34 @@
           <div class="contact__form__title">
               <h2>Add Posts</h2>
           </div>
-          <form action="#">
-              <input type="text" placeholder="Your Id"  [(ngModel)]="id" name="id" #inputTitle>
-              <input type="text" placeholder="Your Title"  [(ngModel)]="title" name="title" #inputTitle>
-              <input type="text" placeholder="Your Text"  [(ngModel)]="text" name="text">
-              <button type="submit" class="site-btn" (click)="addPost()">Add</button>
+          <form [formGroup]="form" (ngSubmit)="addPost()">
+              <input type="text" placeholder="Your Id"  formControlName="id">
+              <div class="errors" *ngIf="form.get('id').errors && form.get('id').touched">
+                <small *ngIf="form.get('id').errors.required">Это поле обязательно для заполнения</small>
+              </div>
+
+              <input type="text" placeholder="Your Title"  formControlName="title"  >
+              <div class="errors" *ngIf="form.get('title').errors && form.get('title').touched">
+                <small *ngIf="form.get('title').errors.required">Это поле обязательно для заполнения</small>
+                <small *ngIf="form.get('title').errors.minlength">
+                  Минимальная длина этого поля {{ form.get('title').errors.minlength.requiredLength }}.
+                  Вы ввели {{ form.get('title').errors.minlength.actualLength }} символов
+                </small>
+              </div>
+
+              <input type="text" placeholder="Your Text"  formControlName="text"  >
+
+              <div class="errors" *ngIf="form.get('text').errors && form.get('text').touched">
+                <small *ngIf="form.get('text').errors.required">Это поле обязательно для заполнения</small>
+                <small *ngIf="form.get('text').errors.minlength">
+                  Минимальная длина этого поля {{ form.get('text').errors.minlength.requiredLength }}.
+                  Вы ввели {{ form.get('text').errors.minlength.actualLength }} символов
+                </small>
+              </div>
+
+              <button type="submit" class="btn btn-success" [disabled]="form.invalid">Add</button>
           </form>
-          <button type="button" class="site-btn" (click)="focusTitle()">Focus</button>
+          <button type="button" class="site-btn" (click)="focusTitle()" >Focus</button>
       </div>
   </div>
 </div>
